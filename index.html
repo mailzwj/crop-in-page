@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>网页截图服务</title>
+<style>
+body {
+    margin: 0;
+    font: 14px/1.5 'PingFang SC', 'Microsoft Yahei', sans-serif;
+    color: #333;
+}
+
+.container {
+    padding: 100px 0 0;
+    text-align: center;
+}
+
+.container .cut-btn {
+    display: inline-block;
+    padding: 10px 50px;
+    text-decoration: none;
+    color: #333;
+    font-size: 32px;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+}
+
+.container .cut-btn:hover {
+    background-color: #f8f8f8;
+}
+
+.container .code-main {
+    margin-top: 50px;
+}
+
+.container .code-info .step {
+    display: inline-block;
+    position: relative;
+    padding: 10px 0 15px;
+}
+
+.container .code-info .step:after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    content: '';
+    transform: translate(-50%, 0);
+    border-top: 5px solid #999;
+    border-right: 5px solid transparent;
+    border-bottom: 0;
+    border-left: 5px solid transparent;
+}
+
+.container .code-info .step:last-child:after {
+    content: none;
+}
+
+.container .fav-code {
+    padding: 5px;
+    width: 640px;
+    height: 150px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    outline: none;
+    resize: none;
+    background-color: #f8f8f8;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <a id="J_StartCrop" href="javascript:(function(){alert(1);})();" class="cut-btn">点击截图</a>
+        <div class="code-main">
+            <p class="code-info">
+                将以下代码添加到收藏夹，完成网页截图快捷工具安装。添加步骤：
+                <br><span class="step">点击浏览器右上角“...”菜单</span>
+                <br><span class="step">选择“书签(B)”</span>
+                <br><span class="step">点选“书签管理器(B)”</span>
+                <br><span class="step">点击页面右上角“...”菜单</span>
+                <br><span class="step">选择“添加新书签”</span>
+                <br><span class="step">输入名称、在“网址”栏粘贴以下代码</span>
+                <br><span class="step">保存</span>
+            </p>
+            <textarea id="J_CodeArea" class="fav-code" readonly>javascript:(function(){
+    alert(1);
+})();</textarea>
+        </div>
+    </div>
+<!-- <script src="./dist/index.min.js"></script> -->
+<script>
+(() => {
+    const area = document.querySelector('#J_CodeArea');
+    area.addEventListener('focus', () => {
+        area.select();
+    }, false);
+
+    const sc = document.querySelector('#J_StartCrop');
+    const startCrop = () => {
+        const ins = new CropInPage.default();
+        ins.init();
+    };
+    sc.addEventListener('click', (ev) => {
+        if (typeof CropInPage === 'undefined') {
+            const scr = document.createElement('script');
+            scr.src = '//seejs.me/crop-in-page/dist/index.min.js';
+            document.body.appendChild(scr);
+            src.addEventListener('load', () => {
+                startCrop();
+            });
+        } else {
+            startCrop();
+        }
+    }, false);
+})();
+</script>
+</body>
+</html>
