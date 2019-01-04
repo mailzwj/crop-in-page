@@ -274,7 +274,9 @@ class CropInPage {
         img.addEventListener('load', () => {
             const width = img.width;
             const height = img.height;
-            if (width > height) {
+            const winWidth = window.innerWidth;
+            const winHeight = window.innerHeight;
+            if (width / height > winWidth / height) {
                 img.style.maxWidth = '80%';
             } else {
                 img.style.maxHeight = '80%';
