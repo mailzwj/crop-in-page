@@ -44,15 +44,26 @@ class CropInPage {
         const cropType = document.createElement('div');
         cropType.className = 'select-cropper-type';
         cropType.innerHTML = `
-            <input type="button" class="J_CropSelector cropper-btn cropper-fullpage" value="整页截图">
-            <input type="button" class="J_CropSelector cropper-btn cropper-fullscreen" value="全屏截图">
-            <input type="button" class="J_CropSelector cropper-btn cropper-select" value="框选区域">
+            <div>
+                <div class="cropper-desc">按键盘ESC键关闭插件，【框选区域】截图时双击选区确认截图<br>截图完成后，右键“图片存储为...”即可保存截图</div>
+                <input type="button" class="J_CropSelector cropper-btn cropper-fullpage" value="整页截图">
+                <input type="button" class="J_CropSelector cropper-btn cropper-fullscreen" value="全屏截图">
+                <input type="button" class="J_CropSelector cropper-btn cropper-select" value="框选区域">
+            </div>
         `;
+
+        const viewBox = document.createElement('div');
+        viewBox.className = 'cropper-view';
+
+        const loader = document.createElement('div');
+        loader.className = 'cropper-loader';
 
         this.main = wrap;
         this.cropper = cvs;
         this.resizer = resizer;
         this.typeSelector = cropType;
+        this.viewBox = viewBox;
+        this.loader = loader;
 
         this.ctx = cvs.getContext('2d');
         this.ctx.fillStyle = this.config.backgroundColor;
@@ -61,6 +72,8 @@ class CropInPage {
         wrap.appendChild(cvs);
         wrap.appendChild(resizer);
         wrap.appendChild(cropType);
+        wrap.appendChild(viewBox);
+        wrap.appendChild(loader);
         document.body.appendChild(wrap);
     }
 
@@ -123,6 +136,8 @@ class CropInPage {
             this.ctx = null;
             this.resizer = null;
             this.typeSelector = null;
+            this.viewBox = null;
+            this.loader = null;
         }
     }
 
@@ -249,13 +264,25 @@ class CropInPage {
 
     crop(params) {
         let querys = [];
+        this.main.className = 'cropper-main loading';
         params = params || {};
         for (let key in params) {
             querys.push(key + '=' + params[key]);
         }
         const img = new Image();
         img.src = `http://39.96.76.88:3002/crop?${querys.join('&')}`;
-        document.body.appendChild(img);
+        img.addEventListener('load', () => {
+            const width = img.width;
+            const height = img.height;
+            if (width > height) {
+                img.style.maxWidth = '80%';
+            } else {
+                img.style.maxHeight = '80%';
+            }
+            this.main.className = 'cropper-main view';
+            this.viewBox.innerHTML = '';
+            this.viewBox.appendChild(img);
+        });
     }
 
     initEvent() {

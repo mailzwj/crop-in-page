@@ -13,7 +13,9 @@
         font: 14px/1.5 'PingFang SC', 'Microsoft Yahei', sans-serif;
     }
 
-    .select-cropper-type {
+    .select-cropper-type,
+    .cropper-view,
+    .cropper-loader {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -22,7 +24,15 @@
         left: 0;
         width: 100%;
         height: 100%;
+        text-align: center;
         background-color: rgba(0, 0, 0, .3);
+    }
+
+    .select-cropper-type {
+        .cropper-desc {
+            margin-bottom: 20px;
+            color: #f0f0f0;
+        }
 
         .cropper-btn {
             margin: 0 5px;
@@ -40,8 +50,24 @@
         }
     }
 
-    .cropper-canvas {
+    .cropper-canvas,
+    .cropper-view,
+    .cropper-loader {
         display: none;
+    }
+
+    .cropper-loader:after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        content: '';
+        padding: 30px;
+        width: 64px;
+        height: 64px;
+        background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjRweCIgIGhlaWdodD0iNjRweCIgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiBjbGFzcz0ibGRzLWluZmluaXR5IiBzdHlsZT0iYmFja2dyb3VuZDogbm9uZTsiPjxwYXRoIGZpbGw9Im5vbmUiIG5nLWF0dHItc3Ryb2tlPSJ7e2NvbmZpZy5zdHJva2V9fSIgbmctYXR0ci1zdHJva2Utd2lkdGg9Int7Y29uZmlnLndpZHRofX0iIG5nLWF0dHItc3Ryb2tlLWRhc2hhcnJheT0ie3tjb25maWcuZGFzaGFycmF5fX0iIGQ9Ik0yNC4zLDMwQzExLjQsMzAsNSw0My4zLDUsNTBzNi40LDIwLDE5LjMsMjBjMTkuMywwLDMyLjEtNDAsNTEuNC00MCBDODguNiwzMCw5NSw0My4zLDk1LDUwcy02LjQsMjAtMTkuMywyMEM1Ni40LDcwLDQzLjYsMzAsMjQuMywzMHoiIHN0cm9rZT0iI2ZkZmRmZCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtZGFzaGFycmF5PSI1LjEzMTc3ODU2NDQ1MzEyNSA1LjEzMTc3ODU2NDQ1MzEyNSI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLWRhc2hvZmZzZXQiIGNhbGNNb2RlPSJsaW5lYXIiIHZhbHVlcz0iMDsyNTYuNTg4OTI4MjIyNjU2MjUiIGtleVRpbWVzPSIwOzEiIGR1cj0iMC4yIiBiZWdpbj0iMHMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+PC9wYXRoPjwvc3ZnPg==) center center no-repeat transparent;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        border: 1px solid #f8f8f8;
     }
 
     .cropper-resize {
@@ -122,6 +148,26 @@
         .cropper-canvas,
         .cropper-resize {
             display: block;
+        }
+    }
+
+    &.loading {
+        .select-cropper-type {
+            display: none;
+        }
+
+        .cropper-loader {
+            display: block;
+        }
+    }
+
+    &.view {
+        .select-cropper-type {
+            display: none;
+        }
+
+        .cropper-view {
+            display: flex;
         }
     }
 }
