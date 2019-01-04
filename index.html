@@ -71,7 +71,7 @@ body {
 </head>
 <body>
     <div class="container">
-        <a id="J_StartCrop" href="javascript:(function(){alert(1);})();" class="cut-btn">点击截图</a>
+        <a id="J_StartCrop" href="javascript:void(0);" class="cut-btn">点击截图</a>
         <div class="code-main">
             <p class="code-info">
                 将以下代码添加到收藏夹，完成网页截图快捷工具安装。添加步骤：
@@ -106,7 +106,7 @@ body {
             const scr = document.createElement('script');
             scr.src = '//seejs.me/crop-in-page/dist/index.min.js';
             document.body.appendChild(scr);
-            src.addEventListener('load', () => {
+            scr.addEventListener('load', () => {
                 startCrop();
             });
         } else {
