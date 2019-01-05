@@ -331,12 +331,13 @@ class CropInPage {
                     };
                     this.crop(params);
                 } else if (target.classList.contains('cropper-fullscreen')) {
+                    const el = document.documentElement || document.body;
                     const params = {
                         src: encodeURIComponent(location.href),
                         // src: encodeURIComponent('https://jd.com'),
                         renderWidth: window.innerWidth,
-                        x: document.body.scrollLeft,
-                        y: document.body.scrollTop,
+                        x: el.scrollLeft,
+                        y: el.scrollTop,
                         width: window.innerWidth,
                         height: window.innerHeight,
                     };
@@ -348,8 +349,9 @@ class CropInPage {
         }, false);
 
         this.resizer.addEventListener('dblclick', (ev) => {
-            const bst = document.body.scrollTop;
-            const bsl = document.body.scrollLeft;
+            const el = document.documentElement || document.body;
+            const bst = el.scrollTop;
+            const bsl = el.scrollLeft;
             const cropParams = {
                 x: bsl + this.resizerBounds.x,
                 y: bst + this.resizerBounds.y,
