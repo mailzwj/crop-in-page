@@ -270,7 +270,7 @@ class CropInPage {
             querys.push(key + '=' + params[key]);
         }
         const img = new Image();
-        img.src = `http://39.96.76.88:3002/crop?${querys.join('&')}`;
+        img.src = `http://cropinpage.com/crop?${querys.join('&')}`;
         img.addEventListener('load', () => {
             const width = img.width;
             const height = img.height;
