@@ -1,6 +1,6 @@
 {
   "name": "crop-in-page",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "网页截图插件，配合Puppeteer完成网页截图",
   "main": "dist/index.min.js",
   "scripts": {
