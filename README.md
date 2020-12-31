@@ -1,6 +1,6 @@
 ## 网页截图插件
 
-配合Puppeteer完成网页截图，[在线示例](http://seejs.me/crop-in-page/)。
+配合Puppeteer完成网页截图，[在线示例](http://newjs.vip/crop-in-page/)。
 
 ### 预览
 ![CropInPage](./crop.gif)
